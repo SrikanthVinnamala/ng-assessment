@@ -1,4 +1,5 @@
 import { Topping } from './topping.model';
+import { Driver } from './driver.model';
 
 export class Order {
     id: number;
@@ -7,4 +8,5 @@ export class Order {
     state: number;
     size: number;
     toppingNames: string;
+    driverName:string;
 }

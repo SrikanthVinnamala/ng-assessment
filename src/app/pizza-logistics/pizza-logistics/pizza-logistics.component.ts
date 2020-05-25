@@ -20,6 +20,7 @@ export class PizzaLogisticsComponent implements OnInit {
   private drivers: Driver[] = [];
   private orders: Order[];
   private ordersQueue: Order[] = [];
+  private driverName:String="";
   get PizzaState() { return PizzaState; }
   @ViewChild('selectDriver', { static: false }) selectedDriver: MatSelectionList;
 
@@ -101,13 +102,17 @@ export class PizzaLogisticsComponent implements OnInit {
 
   private assignDriver(order: Order) {
     console.log(this.selectedDriver._value);
+    console.log("orders",order);
+    this.driverName="";
     if (this.selectedDriver._value == undefined) {
       this.displayMessage(`Select driver to assign`);
       return;
     }
 
+
     let index = this.drivers.findIndex(x => x.id == Number.parseInt(this.selectedDriver._value.toString()));
     let driver = this.drivers[index];
+     order.driverName= driver.firstName+" "+driver.lastName;
     if (driver.state != DriverState.ready) {
       order.state = PizzaState.enRoute;
       this.updateOrder(order);
@@ -131,6 +136,8 @@ export class PizzaLogisticsComponent implements OnInit {
         this.assignDriver(this.ordersQueue[0])
         this.ordersQueue.splice(0, 1);
       }
+      this.driverName=driver.firstName+" "+driver.lastName;
+      console.log("ordersQueue",this.ordersQueue);
       //TODO: make service call to save data
     }, 15 * 1000);
   }
