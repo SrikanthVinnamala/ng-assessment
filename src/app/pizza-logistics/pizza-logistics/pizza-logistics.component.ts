@@ -42,8 +42,7 @@ export class PizzaLogisticsComponent implements OnInit {
       this.drivers = data[0];
       this.orders = data[1];
       this.toppings = data[2];
-      console.log(this.drivers);
-      console.log(this.orders);
+      
       this.orders.map(or => {
         if (or.toppings == undefined)
           or.toppings = [];
@@ -101,8 +100,7 @@ export class PizzaLogisticsComponent implements OnInit {
   }
 
   private assignDriver(order: Order) {
-    console.log(this.selectedDriver._value);
-    console.log("orders",order);
+    
     this.driverName="";
     if (this.selectedDriver._value == undefined) {
       this.displayMessage(`Select driver to assign`);
@@ -137,7 +135,7 @@ export class PizzaLogisticsComponent implements OnInit {
         this.ordersQueue.splice(0, 1);
       }
       this.driverName=driver.firstName+" "+driver.lastName;
-      console.log("ordersQueue",this.ordersQueue);
+      
       //TODO: make service call to save data
     }, 15 * 1000);
   }
@@ -148,12 +146,12 @@ export class PizzaLogisticsComponent implements OnInit {
       this.orders.splice(position, 1);
       this.orders.push(order);
       this.pizzaLogisticService.updateOrder(order).subscribe(data => {
-        //Success message or alternative flow
+        
       });
     } else {
       this.orders.push(order);
       this.pizzaLogisticService.addOrder(order).subscribe(data => {
-        //Success message or alternative flow
+        
       });
     }
   }
@@ -164,7 +162,7 @@ export class PizzaLogisticsComponent implements OnInit {
     this.drivers.push(driver);
     this.drivers = this.drivers.sort((x, y) => { return x.firstName > y.firstName ? 0 : -1; });
     this.pizzaLogisticService.updateDriver(driver).subscribe(data => {
-      //Success message or alternative flow
+      
     });
   }
 

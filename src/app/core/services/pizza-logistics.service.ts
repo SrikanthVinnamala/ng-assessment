@@ -9,7 +9,7 @@ import { Order } from 'src/app/shared/models/order.model';
 })
 export class PizzaLogisticsService {
 
-    private baseAddress: string = "http://localhost:3000";
+    private baseAddress: string = "http://localhost:4300/api/v1";
     constructor(private http: HttpClient) { }
 
     public getDrivers(): Observable<Driver[]> {
